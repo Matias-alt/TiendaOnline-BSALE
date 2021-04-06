@@ -22,13 +22,12 @@
         </div>      
     </nav>
 
-    
     <section class="categories mt-5">
 
-        <button class="btn btn-mostrar-cat">ver categorias <i class="fas fa-caret-down"></i></button>
+        <button class="btn btn-mostrar-cat swing-in-top-fwd">ver categorias <i class="fas fa-caret-down"></i></button>
 
-        <div class="container esconder">
-            <div class="d-lg-flex my-lg-3 justify-content-between">
+        <div class="container esconder swing-in-top-fwd" id="btn-categories">
+            <div class="d-lg-flex my-lg-3 justify-content-between ">
                 <button id="1" class="btn btn-categories">energetica</button>
                 <button id="2" class="btn btn-categories">pisco</button>
                 <button id="3" class="btn btn-categories">ron</button>
@@ -39,7 +38,9 @@
                 <button id="5" class="btn btn-categories">snack</button>
                 <button id="6" class="btn btn-categories">cerveza</button>
                 <button id="7" class="btn btn-categories">vodka</button>
-            </div>         
+            </div> 
+            
+            
         </div>
 
     </section>
@@ -47,10 +48,29 @@
     
     <section class="mt-5"> 
 
-        <div class="container cont-products" id="products"> 
-
+        <div class="container mb-4 search swing-in-top-fwd">
+            <i class="fas fa-search search-icon"></i>
+            <input class="form-control" type="text" 
+                   placeholder="Ingrese el nombre de un producto"
+                   id="search"> 
         </div>
 
+
+        <div class="container">
+            <br>
+            <nav>
+                <ul class="pagination">
+                      
+                </ul>
+            </nav>     
+        </div>
+
+
+        <div class="container cont-products swing-in-top-fwd mb-5" id="products"> 
+            
+        </div>
+
+       
 
     </section>
 
