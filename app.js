@@ -1,30 +1,33 @@
-window.addEventListener('load', (e) =>{
-    e.preventDefault();
-    const listaProductos = document.querySelector('#products');
+window.addEventListener('load', () =>{
+    const productsList = document.querySelector('#products');
     
+    //get all products when starting app
     fetch('http://localhost:3000/products/0/8').then(res =>{
         res.json().then(data=>{
 
-            mostrarProductos(data, listaProductos);
+            showProducts(data, productsList);
 
         });
     });
 
-    filtrarCategorias();
-    buscarCategoriaPorNombre();
-    mostrarMenuCategorias();
-    paginacion();
+    filterByCategories();
+    searchByName();
+    showCategoriesMenu();
+    showPager('http://localhost:3000/products');
 
 })
 
 
-function mostrarProductos(data, listaProductos){
+//function that shows the products from database
+function showProducts(data, productsList){
+    //this function receives a data set and node element where the products will go. 
 
     for (let i=0; i < data.length; i++) {
 
         let product = document.createElement('div');
-        let test;
+        let html;
 
+        //save json object information
         let category = data[i]["category"];
         let name = data[i]["name"];
         let price = data[i]["price"];
@@ -55,31 +58,31 @@ function mostrarProductos(data, listaProductos){
               break;   
         }
 
-
+        //if product discount is equal to 0, the discount icon will not be displayed 
         if(!discount == 0){
 
-            test = `
+            html = `
             <div class="product">
                 <i class="fas fa-bookmark dcto"></i>
                 <p class="porcentaje-dcto">-${discount}%</p>`                   
         }                
         else{
-            test = `
+            html = `
             <div class="product">`               
         }
 
 
         //PENDIENTE
         if(url_image != "" || url_image != null){
-            test += `
+            html += `
                 <img src="${url_image}" alt="">`
         }
         else{
-            test += `
+            html += `
                 <img src="img/misterbig3308256.jpeg" alt="">`
         }
 
-        test += `
+        html += `
             <div class="desc-product px-4 mt-3 mb-3">
                 <p class="w-70">${name}</p>
                 <span class="w-30">$${price}</span>
@@ -90,126 +93,150 @@ function mostrarProductos(data, listaProductos){
             </div>
         </div>`
         
-        product.innerHTML = test; 
-        listaProductos.append(product);
+        product.innerHTML = html; 
+        productsList.append(product);
        
     }
 }
 
-function filtrarCategorias(){
-    const botonesCategorias = document.querySelectorAll('.btn-categories');
+//function that allows you to filter products by category
+function filterByCategories(){
+    const categoriesButtons = document.querySelectorAll('.btn-categories');
     
-    for (let i = 0; i < botonesCategorias.length; i++) {
-        botonesCategorias[i].addEventListener("click", (e) => {
+    //add event click to all buttons
+    for (let i = 0; i < categoriesButtons.length; i++) {
+        categoriesButtons[i].addEventListener("click", (e) => {
+
             e.preventDefault();
             
-            let id = botonesCategorias[i].getAttribute("id")
-            const listaProductos = document.querySelector('#products');
-            //borrar elementos anteriores
+            let id = categoriesButtons[i].getAttribute("id")
+            const productsList = document.querySelector('#products');
+            
+            //delete previous product set
             while (products.firstChild) {
                 products.removeChild(products.firstChild);
             }
-
-            fetch(`http://localhost:3000/products_bycategory/${id}`).then(res =>{
-                 res.json().then(data=>{
-
-                    mostrarProductos(data, listaProductos);
-
-                    for (let i = 0; i < listaProductos.childNodes.length; i++) {
-                        const element = listaProductos.childNodes[i].classList.add("swing-in-top-fwd");                 
-                    }
+      
+            //get all products by category, passing the id and the limit of products to show
+            fetch(`http://localhost:3000/products_bycategory/${id}/0/8`)
+                .then((res) =>{            
+                    res.json()
+                .then((data)=>{
                     
-                })
-            })
+                    showProducts(data, productsList);
 
+                    //add animation to products
+                    for (let i = 0; i < productsList.childNodes.length; i++) {
+                        const element = productsList.childNodes[i].classList.add("swing-in-top-fwd");                 
+                    }             
+                })
+            });
+           
+            showPager(`http://localhost:3000/products_bycategory/${id}`);
         });
     }
+
+    
 }
 
-function buscarCategoriaPorNombre(){
+function searchByName(){
     const input = document.querySelector('#search');
-    const listaProductos = document.querySelector('#products');
+    const productList = document.querySelector('#products');
 
     input.addEventListener('input', (e)=>{
 
         let param = e.target.value;
 
-        //borrar elementos anteriores
+        //delete previous products
         while (products.firstChild) {
             products.removeChild(products.firstChild);
         }
 
+        //if the input is empty, all products will be shown
         if(param === ""){
-
             fetch(`http://localhost:3000/products`).then(res =>{
                 res.json().then(data=>{
                     console.log(data);
-                    mostrarProductos(data, listaProductos);
+                    showProducts(data, productList);
 
-                    for (let i = 0; i < listaProductos.childNodes.length; i++) {
-                        const element = listaProductos.childNodes[i].classList.add("swing-in-top-fwd");               
+                    //add animation to products
+                    for (let i = 0; i < productList.childNodes.length; i++) {
+                        const element = productList.childNodes[i].classList.add("swing-in-top-fwd");               
                     }
                 });
             });
-
         }
+
+        //show products by name
         else{
             fetch(`http://localhost:3000/products_byname/${param}`).then(res =>{
                 res.json().then(data=>{
                     console.log(data);
-                    mostrarProductos(data, listaProductos);
+                    showProducts(data, productList);
     
-                    for (let i = 0; i < listaProductos.childNodes.length; i++) {
-                        const element = listaProductos.childNodes[i].classList.add("swing-in-top-fwd");               
+                    //add animation to products
+                    for (let i = 0; i < productList.childNodes.length; i++) {
+                        const element = productList.childNodes[i].classList.add("swing-in-top-fwd");               
                     }
-    
                 });
             });
-        }
-        
+        }    
     });
-
 }
 
-function mostrarMenuCategorias(){
+function showCategoriesMenu(){
     
-    const btnMenu = document.querySelector('.btn-mostrar-cat');
-    console.log(btnMenu);
+    const menuButton = document.querySelector('.btn-mostrar-cat');
 
-    btnMenu.addEventListener("click", (e)=>{
+    menuButton.addEventListener("click", (e)=>{
         e.preventDefault();
         
-        const btnCategories = document.querySelector('#btn-categories');
-        btnCategories.classList.toggle('esconder');
+        const categoriesButtons = document.querySelector('#btn-categories');
+        categoriesButtons.classList.toggle('esconder');
     });
 }
 
-function paginacion(){
-    fetch('http://localhost:3000/products').then(res =>{
+function showPager(url){
+
+    //delete previous pagination
+    while (pagination.firstChild) {
+        pagination.removeChild(pagination.firstChild);
+    }
+
+    //get all products to calculate how many pages there should be
+    fetch(url).then(res =>{
         res.json().then(data=>{
             
-            let paginas = Math.round(data.length / 8);
-            const contPaginador = document.querySelector('.pagination');
+            //the limit of products per page is 8
+            let numberPages = Math.round(data.length / 8);
+            const newPagination = document.querySelector('.pagination');
 
-            contPaginador.innerHTML += `
+            newPagination.innerHTML += `
                 <li class=""><a href="#" ><i class="fas fa-caret-left"></i></a></li>`;
+            
+            //condition to show at least 1 page
+            if(numberPages === 0){
+                numberPages = 1;
+            }
 
             let cont = 0;
             let init = 0;
             let limit = 8
-            while(cont < paginas) {
+            while(cont < numberPages) {
                 cont += 1;
 
-                contPaginador.innerHTML +=
+                newPagination.innerHTML +=
                 `<li class="pages"><a href="#" id='{"num1":${init}, "num2":8}'>${cont}</a></li>`;
                   
                 init = limit;               
                 limit += 8;
             }     
 
-            contPaginador.innerHTML +=
+            newPagination.innerHTML +=
                 `<li><a href="#"><i class="fas fa-caret-right"></i></a></li>`;
-                    
+            
+             
+            //add to each button within the pager the functionality of displaying the products
             const pages = document.querySelectorAll('.pages');
 
             for (let i = 0; i < pages.length; i++) {
@@ -220,23 +247,20 @@ function paginacion(){
                     var json = JSON.parse(values);
                     const listaProductos = document.querySelector('#products');
 
-                    //borrar elementos anteriores
+                    //Delete previusly products
                     while (products.firstChild) {
                         products.removeChild(products.firstChild);
                     }
 
-                    fetch(`http://localhost:3000/products/${json['num1']}/${json['num2']}`).then(res =>{
+                    //get products by category with limit of pages
+                    fetch(`${url}/${json['num1']}/${json['num2']}`).then(res =>{
                         res.json().then(data=>{
-                            console.log(data);
-                            mostrarProductos(data, listaProductos);
+                            showProducts(data, listaProductos);
                         });
-                    });
-                    
-                })
-                
+                    });  
+                })   
             }
             
         });
     });
 }
-
