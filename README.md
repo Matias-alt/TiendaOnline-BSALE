@@ -1,4 +1,6 @@
 # Online store-BSALE
+Visit de web app -> https://gallant-villani-227bfe.netlify.app/ 
+
 This application shows the products from the BSALE database, connecting to a Rest Api. It is developed with html, css, bootstrap and vanilla javascript
 
 
