@@ -168,12 +168,11 @@ function filterByCategories(){
 
 //function that allows you to search products by category
 function searchByName(){
-    const input = document.querySelector('#search');
+    
+    const searchButton = document.querySelector('#search2');   
     const productList = document.querySelector('#products');
 
-    input.addEventListener('input', (e)=>{
-
-        let param = e.target.value;
+    searchButton.addEventListener('click', (e)=>{
 
         //delete previous products
         while (products.firstChild) {
@@ -181,8 +180,10 @@ function searchByName(){
         }
 
         try {         
+            const input = document.querySelector('#search').value;
+
             //if the input is empty, all products will be shown
-            if(param === ""){
+            if(input === ""){
                 fetch(`https://restapi-nodejs-msql.herokuapp.com/products/0/8`).then(res =>{
                     res.json().then(data=>{
                         console.log(data);
@@ -197,7 +198,7 @@ function searchByName(){
             }
             //show products by name
             else{
-                fetch(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${param}/0/8`).then(res =>{
+                fetch(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${input}/0/8`).then(res =>{
                     res.json().then(data=>{
                         console.log(data);
                         showProducts(data, productList);
@@ -209,7 +210,7 @@ function searchByName(){
                     });
                 });
 
-                showPager(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${param}`);
+                showPager(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${input}`);
             } 
 
         } catch (error) {

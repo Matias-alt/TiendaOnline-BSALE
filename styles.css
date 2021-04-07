@@ -183,6 +183,30 @@
     display: none;
     color: white;
 }
+.btn-buscar{
+    background-color: rgb(255, 217, 0);
+    border-radius: 10px;
+    width: 30%;
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+    transition: all .2s ease-in-out;
+}
+.btn-buscar:hover{
+    transform: scale(1.02);
+    color: white;
+}
+
+
+@media (max-width: 1000px) {
+    .btn-buscar{
+        font-size: 15px;
+    }
+}
+
+/*-------------------------------------------*/
 
 .search{
     display: flex;
