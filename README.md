@@ -1,5 +1,5 @@
 # Online store-BSALE
-Visit the web app -> https://gallant-villani-227bfe.netlify.app/ 
+Visit the web app -> https://gallant-villani-227bfe.netlify.app/
 
 This application shows the products from the BSALE database, connecting to a Rest Api. It is developed with html, css, bootstrap and vanilla javascript. This app is deployed in Netlify
 
@@ -9,7 +9,7 @@ There is a category section, where there are several buttons that will bring the
 
 the pager changes dynamically depending on the set of products to be displayed.
 
-The search engine is able to identify in real time the letter or word that is written, making the products available
+The search engine is able to identify the letter or word that is written, making the products available
 
 # Includes
 - Product visualization
