@@ -18,13 +18,46 @@
 @-webkit-keyframes swing-in-top-fwd{0%{-webkit-transform:rotateX(-100deg);transform:rotateX(-100deg);-webkit-transform-origin:top;transform-origin:top;opacity:0}100%{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);-webkit-transform-origin:top;transform-origin:top;opacity:1}}@keyframes swing-in-top-fwd{0%{-webkit-transform:rotateX(-100deg);transform:rotateX(-100deg);-webkit-transform-origin:top;transform-origin:top;opacity:0}100%{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);-webkit-transform-origin:top;transform-origin:top;opacity:1}} 
 
 
+.categories{
+    padding: 100px 0 ;
+    background-image: url(img/fondo.jpg);
+    background-color: #cccccc; /* Used if the image is unavailable */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */  
+}
+
+@media (max-width: 1000px) {
+  
+    .categories{
+        padding: 50px 0 ;
+
+    }    
+}
+
 /*productos*/
+#products{
+    background-image: url(img/empty.png);
+    height: 800px;
+    width: 100%;   
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: contain;  
+}
+
 
 .cont-products{
     display: grid;
     grid-template-columns: repeat(4, 23.5%);
     column-gap: 20px;
     row-gap: 20px;
+}
+
+@media (max-width: 1000px) {
+  
+    .cont-products div:last-child{
+        margin-bottom: 20px;
+    } 
 }
 
 .product{
@@ -38,23 +71,23 @@
     background-color: #fdd4bd;
     background-image: linear-gradient(62deg, #fdd4bd 0%, #f9e650 100%);
 
-
     -webkit-box-shadow: 3px 3px 8px 1px rgba(122, 122, 122, 0.75);
     -moz-box-shadow: 3px 3px 8px 1px rgba(121, 121, 121, 0.75);
     box-shadow: 3px 3px 8px 1px rgba(104, 104, 104, 0.75);
 }
 .product:hover{
     transform: scale(1.03);  
-
 }
 
 .product img{
+    height: 208px;
     width: 100%;
 }
 
 .desc-product{
-    display: flex;
-    align-items: center;   
+    display: block;
+    text-align: center;  
+
 }
 
 .desc-product p{
@@ -64,7 +97,9 @@
 .desc-product span{
     color: rgb(37, 37, 37);
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
+    
+    margin-top: 15px;
 }
 
 .dcto{
@@ -84,6 +119,20 @@
     color: rgb(255, 255, 255);
 }
 
+.tag-category{
+    background-color: #F76B1C;
+    border-radius: 50px;
+    font-size: 10px;
+    color: white;
+}
+
+.cont-p{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*botones*/
 
 .btn-category{
@@ -93,19 +142,20 @@
     font-size: 10px;
     transition: all .2s ease-in-out;
     color: white;
-
 }
 
 .btn-categories{
     position: relative;
     text-transform: uppercase;
-    border: 2px solid rgb(255, 217, 0);
+    border: 2px solid rgba(252, 252, 252, 0.295);
     border-radius: 10px;
     padding: 20px 40px;
     font-weight: bold;
-    font-size: 100%;
     width: 20%;
     transition: all .1s ease-in-out;
+    color: rgb(250, 250, 250);
+    background-image: linear-gradient(90deg, #ffe270c7 0%, #f8ff94d0 100%);
+    font-family: 'Varela Round', sans-serif;
 }
 .btn-categories:hover{
    transform: scale(1.02);
@@ -115,7 +165,7 @@
     position: absolute;
     content: "";
     border-radius: 5px;
-    background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+    background-image: linear-gradient(90deg, #ff9f73 0%, #f3f55e7a 100%);
     top: 0;
     left: 0;
     width: 0%;
@@ -131,6 +181,7 @@
 
 .btn-mostrar-cat{
     display: none;
+    color: white;
 }
 
 .search{
@@ -247,6 +298,12 @@
     background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
 }
 
+.selected{
+    border-radius: 10px;
+    transform: scale(1.2);
+    background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+}
+
 .pagination a{
     display: block;
     color: black;
@@ -262,3 +319,102 @@
     }
    
 }
+
+
+/*Footer*/
+footer{
+    background-color: #fdd4bd;
+    background-image: linear-gradient(62deg, #fdd4bd 0%, #f9e650 100%);
+    padding: 50px 0 10px 0;
+}
+
+@media (max-width: 768px) {
+    footer{
+        display: none;
+    }
+   
+}
+
+
+
+.footer-icon{
+    font-size: 50px;
+    text-align: center; 
+}
+.effect{
+    color: black;
+    transition: all .2s ease-in-out;
+}
+.effect:hover{
+    -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+	        animation: heartbeat 1.5s ease-in-out infinite both;
+}
+
+@-webkit-keyframes effect {
+    from {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform-origin: center center;
+              transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+    10% {
+      -webkit-transform: scale(0.91);
+              transform: scale(0.91);
+      -webkit-animation-timing-function: ease-in;
+              animation-timing-function: ease-in;
+    }
+    17% {
+      -webkit-transform: scale(0.98);
+              transform: scale(0.98);
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+    33% {
+      -webkit-transform: scale(0.87);
+              transform: scale(0.87);
+      -webkit-animation-timing-function: ease-in;
+              animation-timing-function: ease-in;
+    }
+    45% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+  }
+  @keyframes heartbeat {
+    from {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform-origin: center center;
+              transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+    10% {
+      -webkit-transform: scale(0.91);
+              transform: scale(0.91);
+      -webkit-animation-timing-function: ease-in;
+              animation-timing-function: ease-in;
+    }
+    17% {
+      -webkit-transform: scale(0.98);
+              transform: scale(0.98);
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+    33% {
+      -webkit-transform: scale(0.87);
+              transform: scale(0.87);
+      -webkit-animation-timing-function: ease-in;
+              animation-timing-function: ease-in;
+    }
+    45% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+  }
