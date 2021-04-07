@@ -1,8 +1,7 @@
 # Online store-BSALE
-Visit de web app -> https://gallant-villani-227bfe.netlify.app/ 
+Visit the web app -> https://gallant-villani-227bfe.netlify.app/ 
 
-This application shows the products from the BSALE database, connecting to a Rest Api. It is developed with html, css, bootstrap and vanilla javascript
-
+This application shows the products from the BSALE database, connecting to a Rest Api. It is developed with html, css, bootstrap and vanilla javascript. This app is deployed in Netlify
 
 The main objective is to show the products and their attributes. validating that if it does not have a discount percentage, it will not be shown and if the product does not have an image, a reference image will be displayed.
 
