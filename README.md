@@ -1,8 +1,8 @@
 # TiendaOnline-BSALE
-Esta aplicacion muestra los productos de la base de datos BSALE, conectandose a una Rest Api. Esta desarrollada con html, css, bootstrap y vainilla javascript
+This application shows the products from the BSALE database, connecting to a Rest Api. It is developed with html, css, bootstrap and vanilla javascript
 
-# Incluye
-- Visualizacion de productos
-- Filtrado por categoria y nombre de producto
-- Paginador
-- Diseño responsivo
+# Includes
+- Product visualization
+- Filtered by category and product name
+- Pager
+- Responsive design
