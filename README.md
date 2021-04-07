@@ -1,4 +1,4 @@
-# TiendaOnline-BSALE
+# Online store-BSALE
 This application shows the products from the BSALE database, connecting to a Rest Api. It is developed with html, css, bootstrap and vanilla javascript
 
 
