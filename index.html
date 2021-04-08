@@ -52,8 +52,9 @@
             <i class="fas fa-search search-icon"></i>
             <input class="form-control" type="text" 
                    placeholder="Ingrese el nombre de un producto"
-                   id="search"> 
-            <button id="search2" class="btn btn-buscar">buscar</button>
+                   id="search"
+                   onkeypress="searchEnter(event)"> 
+            <button id="search2" class="btn btn-buscar" onclick="searchProductsByName()">buscar</button>
         </div>
 
 

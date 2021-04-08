@@ -15,7 +15,6 @@ window.addEventListener('load', () =>{
 
         scrollEffect();
         filterByCategories();
-        searchByName();
         showCategoriesMenu();
         showPager('https://restapi-nodejs-msql.herokuapp.com/products');
 
@@ -166,72 +165,52 @@ function filterByCategories(){
     
 }
 
-//function that allows you to search products by category
-function searchByName(){
-    
-    const searchButton = document.querySelector('#search2');   
-    const productList = document.querySelector('#products');
+//function that allows you to search products by name
+function searchProductsByName(){
 
-    searchButton.addEventListener('click', (e)=>{
+    //delete previous products
+    while (products.firstChild) {
+        products.removeChild(products.firstChild);
+    }
 
-        //delete previous products
-        while (products.firstChild) {
-            products.removeChild(products.firstChild);
-        }
+    try {   
+        const productList = document.querySelector('#products');      
+        const input = document.querySelector('#search').value;
 
-        try {         
-            const input = document.querySelector('#search').value;
+        //if the input is empty, all products will be shown
+        if(input === ""){
+            fetch(`https://restapi-nodejs-msql.herokuapp.com/products/0/8`).then(res =>{
+                res.json().then(data=>{
+                    console.log(data);
+                    showProducts(data, productList);
 
-            //if the input is empty, all products will be shown
-            if(input === ""){
-                fetch(`https://restapi-nodejs-msql.herokuapp.com/products/0/8`).then(res =>{
-                    res.json().then(data=>{
-                        console.log(data);
-                        showProducts(data, productList);
-
-                        //add animation to products
-                        for (let i = 0; i < productList.childNodes.length; i++) {
-                            const element = productList.childNodes[i].classList.add("swing-in-top-fwd");               
-                        }
-                    });
+                    //add animation to products
+                    for (let i = 0; i < productList.childNodes.length; i++) {
+                        const element = productList.childNodes[i].classList.add("swing-in-top-fwd");               
+                    }
                 });
-            }
-            //show products by name
-            else{
-                fetch(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${input}/0/8`).then(res =>{
-                    res.json().then(data=>{
-                        console.log(data);
-                        showProducts(data, productList);
-
-                        //add animation to products
-                        for (let i = 0; i < productList.childNodes.length; i++) {
-                            const element = productList.childNodes[i].classList.add("swing-in-top-fwd");               
-                        }
-                    });
-                });
-
-                showPager(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${input}`);
-            } 
-
-        } catch (error) {
-
-            alert("Ha ocurrido un error al cargar los productos : ", error);
+            });
         }
-                      
-    });
-}
+        //show products by name
+        else{
+            fetch(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${input}/0/8`).then(res =>{
+                res.json().then(data=>{
+                    showProducts(data, productList);
 
-//function that show a menu responsive
-function showCategoriesMenu(){
-    
-    const menuButton = document.querySelector('.btn-mostrar-cat');
+                    //add animation to products
+                    for (let i = 0; i < productList.childNodes.length; i++) {
+                        const element = productList.childNodes[i].classList.add("swing-in-top-fwd");               
+                    }
+                });
+            });
 
-    menuButton.addEventListener("click", (e)=>{
-        e.preventDefault();
-        
-        const categoriesButtons = document.querySelector('#btn-categories');
-        categoriesButtons.classList.toggle('esconder');
-    });
+            showPager(`https://restapi-nodejs-msql.herokuapp.com/products_byname/${input}`);
+        } 
+
+    } catch (error) {
+
+        alert("Ha ocurrido un error al cargar los productos : ", error);
+    }
 }
 
 //function that shows a pager that dynamically changes according to the number of products
@@ -324,4 +303,26 @@ function showPager(url){
 
     
     
+}
+
+//function that detects when the enter key is pressed in the search input 
+function pressSearchEnter(e){
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla==13){
+
+        searchProductsByName();
+    }   
+}
+
+//function that show a menu responsive
+function showCategoriesMenu(){
+    
+    const menuButton = document.querySelector('.btn-mostrar-cat');
+
+    menuButton.addEventListener("click", (e)=>{
+        e.preventDefault();
+        
+        const categoriesButtons = document.querySelector('#btn-categories');
+        categoriesButtons.classList.toggle('esconder');
+    });
 }
