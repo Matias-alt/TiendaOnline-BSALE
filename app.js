@@ -1,10 +1,10 @@
 window.addEventListener('load', () =>{
 
     const productsList = document.querySelector('#products');
-    
 
     try {
         //get all products when starting app
+        //https://restapi-nodejs-msql.herokuapp.com
         fetch('https://restapi-nodejs-msql.herokuapp.com/products/0/8').then(res =>{
             res.json().then(data=>{
 
@@ -23,6 +23,10 @@ window.addEventListener('load', () =>{
         alert("Ha ocurrido un error al cargar los productos : ", error);
       }
 })
+
+//Variable global
+let num = 1
+
 
 function scrollEffect(){
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -128,8 +132,8 @@ function filterByCategories(){
         categoriesButtons[i].addEventListener("click", (e) => {
 
             e.preventDefault();
-            
-            let id = categoriesButtons[i].getAttribute("id")
+            num = 1;
+            let id = categoriesButtons[i].getAttribute("id");
             const productsList = document.querySelector('#products');
             
             //delete previous product set
@@ -232,7 +236,7 @@ function showPager(url){
                 const newPagination = document.querySelector('.pagination');
 
                 newPagination.innerHTML += `
-                    <li id="pag"><a href="#" ><i class="fas fa-caret-left"></i></a></li>`;
+                    <li id="prev"><a href="#pag" ><i class="fas fa-caret-left"></i></a></li>`;
                 
                 //condition to show at least 1 page
                 if(numberPages === 0){
@@ -253,15 +257,34 @@ function showPager(url){
                 }     
 
                 newPagination.innerHTML +=
-                    `<li><a href="#"><i class="fas fa-caret-right"></i></a></li>`;
+                    `<li id="next"><a href="#pag"><i class="fas fa-caret-right"></i></a></li>`;
                 
                 
                 //add to each button within the pager the functionality of displaying the products
                 const pages = document.querySelectorAll('.pages');
+            
+                //listening by click on pager arrows
+                document.querySelector('#next').addEventListener('click', ()=>{
+                    if(num < pages.length){                      
+                        //set global variable
+                        num+=1;
+                        pressPagerArrow(pages, num, url);                       
+                    }                    
+                });
 
+                document.querySelector('#prev').addEventListener('click', ()=>{
+                    if(num > 1){                        
+                        //set global variable
+                        num-=1;
+                        pressPagerArrow(pages, num, url);                       
+                    }                
+                });
+
+                //listening by click on pager numbers
                 for (let i = 0; i < pages.length; i++) {
                     pages[i].addEventListener('click', ()=>{
-                        
+                        //set global variable
+                        num = i+1
                         //add select effect
                         for (let j = 0; j < pages.length; j++) {
                             pages[j].classList.remove('selected');      
@@ -309,7 +332,6 @@ function showPager(url){
 function pressSearchEnter(e){
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla==13){
-
         searchProductsByName();
     }   
 }
@@ -325,4 +347,36 @@ function showCategoriesMenu(){
         const categoriesButtons = document.querySelector('#btn-categories');
         categoriesButtons.classList.toggle('esconder');
     });
+}
+
+function pressPagerArrow(pages, num, url){
+    let id = `{"num1":${num*8-8}, "num2":8}`
+
+    for (let j = 0; j < pages.length; j++) {
+        pages[j].classList.remove('selected');      
+    } 
+
+    let result = document.getElementById(id);
+    result.parentNode.classList.add('selected');
+    
+
+    //PRUEBA
+    var json = JSON.parse(id);
+    const listaProductos = document.querySelector('#products');
+
+    //Delete previusly products
+    while (products.firstChild) {
+        products.removeChild(products.firstChild);
+    }
+
+    try {
+        //get products by category with limit of pages
+        fetch(`${url}/${json['num1']}/${json['num2']}`).then(res =>{
+            res.json().then(data=>{
+                showProducts(data, listaProductos);
+            });
+        }); 
+    } catch (error) {
+        alert("Ha ocurrido un error al cargar los productos : ", error);
+    } 
 }
