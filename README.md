@@ -34,44 +34,44 @@ de datos BSALE. En todo el desarrollo se realizaron peticiones http por el metod
 consultar los distintos endpoints disponibles en la api rest desarrollada. Se utilizo "fetch"
 para realizar estas peticiones. las funciones encargadas de realizar esto son:
 
-showProducts(): se encarga de mostrar los productos en la seccion correspondiente. Recibe 2 
+***showProducts():*** se encarga de mostrar los productos en la seccion correspondiente. Recibe 2 
 parametros, el primero es el data set obtenido por la peticion "fetch",  el segundo es el 
 contenedor en donde iran los productos.
 
-showPager(): se encarga de mostrar un paginador dinamico, que varia segun la cantidad de productos
+***showPager():*** se encarga de mostrar un paginador dinamico, que varia segun la cantidad de productos
 devueltos por la peticion "fetch". En base a al total de productos obtenidos, se realiza un calculo 
 para segmentar los productos en diversas paginas si la cantidad es superior a 8, ya que este fue el numero 
 maximo de productos que opte por elegir. Quiero recalcar que en internet existian varios ejemplos de 
 paginadores, pero quise crear uno desde 0, ya que era un gran desafio tecnico, almenos para mi, pues nunca
 habia desarrollado uno.
 
-filterByCategories(): esta funcion se ejecuta al iniciar la aplicacion y queda a la espera de que
+***filterByCategories():*** esta funcion se ejecuta al iniciar la aplicacion y queda a la espera de que
 el usuario haga click en cualquiera de los botones de categorias. Este evento click ejecuta su respectivo
 llamado "fetch" y se apoya en las funciones "showProducts" y "showPager".
 
-showCategoriesMenu(): esta funcion se encarga de mostrar un menu responsive para celulares y tablets, 
+***showCategoriesMenu():*** esta funcion se encarga de mostrar un menu responsive para celulares y tablets, 
 en donde la seccion de categorias se esconde y se muestra median un menu en la parte superior.
 
-scrollEffect(): permite desplazarse a travez de la pagina de forma fluida al hacer click en un elemento "<a>",
+***scrollEffect():*** permite desplazarse a travez de la pagina de forma fluida al hacer click en un elemento "<a>",
 indicando hacia donde se dirigira mediante su id. 
 
-pressSearchEnter(): esta funciona ejecuta el evento onkeypress del boton buscar por nombre, identificando
+***pressSearchEnter():*** esta funciona ejecuta el evento onkeypress del boton buscar por nombre, identificando
 cuando el usuario presion "Enter".
 
-pressPagerArrow(): esta funcion permite desplazarse por el paginador a travez de sus flechas
+***pressPagerArrow():*** esta funcion permite desplazarse por el paginador a travez de sus flechas
 
 
-Segunda seccion (categorias): esta seccion permite al usuario filtrar los productos mostrados
+***Segunda seccion (categorias):*** esta seccion permite al usuario filtrar los productos mostrados
 segun su id de categoria, el podra elegir entre energetica, pisco, ron, bebida, snack, 
 cerveza y vodka. A nivel de codigo, se ejecuta la funcion "filterByCategories" que 
 a su vez realiza un llamado via http a la api rest. Tambien se utilizan los metodos.
 
-Tercera seccion (buscador): esta seccion le da la opcion al usuario de buscar un producto por su nombre,
+***Tercera seccion (buscador):*** esta seccion le da la opcion al usuario de buscar un producto por su nombre,
 ingresando alguna palabra o letra que se encuentre al princio, final o al medio del nombre del producto
 buscado. Para esto se ejecuto la funcion "searchProductsByName" que realiza una peticion "fetch" y 
 se apoya en las funciones "showProducts" y "showPager".
 
-Cuarta seccion (productos): esta seccion muestra los productos tanto al iniciar la aplicacion, como cuando
+***Cuarta seccion (productos):*** esta seccion muestra los productos tanto al iniciar la aplicacion, como cuando
 se realiza un filtrado por categoria o nombre, estos productos tienen forma de tarjeta y muestran la informacion
 especifica del producto. Tambien es capaz de identificar cuando un producto tiene o no descuento aplicado.
 
