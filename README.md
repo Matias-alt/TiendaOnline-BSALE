@@ -13,9 +13,8 @@ los elementos de HTML asignandoles demasiadas clases de bootstrap, solo lo justo
 siento que tengo mejor control utilizando css puro, aunque siempre dependera del caso o desarrollo
 en particular. Ademas me apoye con FontAwesome para agregar iconos y Google Fonts para usar fuentes personalizadas.
 
-La aplicacion web consta de 4 secciones, la primera es el navbar, que solo contiene el logo
-de "el bodegon", la segunda contiene las categorias disponibles de los productos, la tercera 
-contiene el buscador de productos, y la cuarta es donde se muestran los productos con su respectivo
+La aplicacion web consta de 3 principales secciones, la primera contiene las categorias disponibles de los productos, la segunda 
+contiene el buscador de productos, y la tercera es el contenedor donde se muestran los productos con su respectivo
 paginador.
 
 Debido a que en este ejercicio, se presento la dificultad de que algunos registros de la base
@@ -61,20 +60,27 @@ cuando el usuario presion "Enter".
 ***pressPagerArrow():*** esta funcion permite desplazarse por el paginador a travez de sus flechas
 
 
-## Segunda seccion (categorias)
+## Primera seccion (categorias)
 esta seccion permite al usuario filtrar los productos mostrados
 segun su id de categoria, el podra elegir entre energetica, pisco, ron, bebida, snack, 
 cerveza y vodka. A nivel de codigo, se ejecuta la funcion "filterByCategories" que 
 a su vez realiza un llamado via http a la api rest. Tambien se utilizan los metodos.
 
-## Tercera seccion (buscador) 
+![image](https://user-images.githubusercontent.com/64926462/115153659-2e9a8c00-a045-11eb-855d-feec1533088e.png)
+
+
+## Segunda seccion (buscador) 
 esta seccion le da la opcion al usuario de buscar un producto por su nombre,
 ingresando alguna palabra o letra que se encuentre al princio, final o al medio del nombre del producto
 buscado. Para esto se ejecuto la funcion "searchProductsByName" que realiza una peticion "fetch" y 
 se apoya en las funciones "showProducts" y "showPager".
 
-## Cuarta seccion (productos)
+![image](https://user-images.githubusercontent.com/64926462/115153671-378b5d80-a045-11eb-833b-c92193166540.png)
+
+
+## Tercera seccion (productos)
 esta seccion muestra los productos tanto al iniciar la aplicacion, como cuando
 se realiza un filtrado por categoria o nombre, estos productos tienen forma de tarjeta y muestran la informacion
 especifica del producto. Tambien es capaz de identificar cuando un producto tiene o no descuento aplicado.
 
+![image](https://user-images.githubusercontent.com/64926462/115153697-54c02c00-a045-11eb-916a-fa78ac25208b.png)
