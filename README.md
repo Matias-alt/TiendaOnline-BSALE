@@ -33,6 +33,16 @@ de datos BSALE. En todo el desarrollo se realizaron peticiones http por el metod
 consultar los distintos endpoints disponibles en la api rest desarrollada. Se utilizo "fetch"
 para realizar estas peticiones. las funciones encargadas de realizar esto son:
 
+```
+fetch('https://restapi-nodejs-msql.herokuapp.com/products/0/8').then(res =>{
+      res.json().then(data=>{
+
+          showProducts(data, productsList);
+
+      });
+});
+```
+
 ***showProducts():*** se encarga de mostrar los productos en la seccion correspondiente. Recibe 2 
 parametros, el primero es el data set obtenido por la peticion "fetch",  el segundo es el 
 contenedor en donde iran los productos.
