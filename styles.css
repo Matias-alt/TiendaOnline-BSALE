@@ -317,15 +317,11 @@
     transition: all .1s ease-in-out;
 }
 .pagination li:hover {    
-    border-radius: 10px;
-    transform: scale(1.2);
-    background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+    background-color: #f7861c;
 }
 
 .selected{
-    border-radius: 10px;
-    transform: scale(1.2);
-    background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+    background-color: #f7861c;
 }
 
 .pagination a{
