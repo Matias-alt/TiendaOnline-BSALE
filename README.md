@@ -61,17 +61,20 @@ cuando el usuario presion "Enter".
 ***pressPagerArrow():*** esta funcion permite desplazarse por el paginador a travez de sus flechas
 
 
-***Segunda seccion (categorias):*** esta seccion permite al usuario filtrar los productos mostrados
+## Segunda seccion (categorias)
+esta seccion permite al usuario filtrar los productos mostrados
 segun su id de categoria, el podra elegir entre energetica, pisco, ron, bebida, snack, 
 cerveza y vodka. A nivel de codigo, se ejecuta la funcion "filterByCategories" que 
 a su vez realiza un llamado via http a la api rest. Tambien se utilizan los metodos.
 
-***Tercera seccion (buscador):*** esta seccion le da la opcion al usuario de buscar un producto por su nombre,
+## Tercera seccion (buscador) 
+esta seccion le da la opcion al usuario de buscar un producto por su nombre,
 ingresando alguna palabra o letra que se encuentre al princio, final o al medio del nombre del producto
 buscado. Para esto se ejecuto la funcion "searchProductsByName" que realiza una peticion "fetch" y 
 se apoya en las funciones "showProducts" y "showPager".
 
-***Cuarta seccion (productos):*** esta seccion muestra los productos tanto al iniciar la aplicacion, como cuando
+## Cuarta seccion (productos)
+esta seccion muestra los productos tanto al iniciar la aplicacion, como cuando
 se realiza un filtrado por categoria o nombre, estos productos tienen forma de tarjeta y muestran la informacion
 especifica del producto. Tambien es capaz de identificar cuando un producto tiene o no descuento aplicado.
 
